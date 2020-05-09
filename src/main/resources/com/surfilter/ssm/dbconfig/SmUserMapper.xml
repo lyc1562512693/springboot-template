@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.surfilter.bootmybatis.ssm.dao.SmUserMapper">
+  <resultMap id="BaseResultMap" type="com.surfilter.bootmybatis.ssm.model.SmUser">
+    <id column="USER_ID" jdbcType="INTEGER" property="USER_ID" />
+    <result column="USER_NAME" jdbcType="VARCHAR" property="USER_NAME" />
+    <result column="USER_TYPE" jdbcType="INTEGER" property="USER_TYPE" />
+    <result column="MAIL" jdbcType="VARCHAR" property="MAIL" />
+    <result column="ADDRESS" jdbcType="VARCHAR" property="ADDRESS" />
+    <result column="PHONE" jdbcType="VARCHAR" property="PHONE" />
+    <result column="USER_PIC" jdbcType="VARCHAR" property="USER_PIC" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    USER_ID, USER_NAME, USER_TYPE, MAIL, ADDRESS, PHONE, USER_PIC
+  </sql>
+  <select id="selectByExample" parameterType="com.surfilter.bootmybatis.ssm.model.SmUserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from sm_user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sm_user
+    where USER_ID = #{USER_ID,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from sm_user
+    where USER_ID = #{USER_ID,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.surfilter.bootmybatis.ssm.model.SmUser">
+    insert into sm_user (USER_ID, USER_NAME, USER_TYPE, 
+      MAIL, ADDRESS, PHONE, 
+      USER_PIC)
+    values (#{USER_ID,jdbcType=INTEGER}, #{USER_NAME,jdbcType=VARCHAR}, #{USER_TYPE,jdbcType=INTEGER}, 
+      #{MAIL,jdbcType=VARCHAR}, #{ADDRESS,jdbcType=VARCHAR}, #{PHONE,jdbcType=VARCHAR}, 
+      #{USER_PIC,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.surfilter.bootmybatis.ssm.model.SmUser">
+    insert into sm_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="USER_ID != null">
+        USER_ID,
+      </if>
+      <if test="USER_NAME != null">
+        USER_NAME,
+      </if>
+      <if test="USER_TYPE != null">
+        USER_TYPE,
+      </if>
+      <if test="MAIL != null">
+        MAIL,
+      </if>
+      <if test="ADDRESS != null">
+        ADDRESS,
+      </if>
+      <if test="PHONE != null">
+        PHONE,
+      </if>
+      <if test="USER_PIC != null">
+        USER_PIC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="USER_ID != null">
+        #{USER_ID,jdbcType=INTEGER},
+      </if>
+      <if test="USER_NAME != null">
+        #{USER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_TYPE != null">
+        #{USER_TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="MAIL != null">
+        #{MAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="ADDRESS != null">
+        #{ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="PHONE != null">
+        #{PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_PIC != null">
+        #{USER_PIC,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.surfilter.bootmybatis.ssm.model.SmUser">
+    update sm_user
+    <set>
+      <if test="USER_NAME != null">
+        USER_NAME = #{USER_NAME,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_TYPE != null">
+        USER_TYPE = #{USER_TYPE,jdbcType=INTEGER},
+      </if>
+      <if test="MAIL != null">
+        MAIL = #{MAIL,jdbcType=VARCHAR},
+      </if>
+      <if test="ADDRESS != null">
+        ADDRESS = #{ADDRESS,jdbcType=VARCHAR},
+      </if>
+      <if test="PHONE != null">
+        PHONE = #{PHONE,jdbcType=VARCHAR},
+      </if>
+      <if test="USER_PIC != null">
+        USER_PIC = #{USER_PIC,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{USER_ID,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.surfilter.bootmybatis.ssm.model.SmUser">
+    update sm_user
+    set USER_NAME = #{USER_NAME,jdbcType=VARCHAR},
+      USER_TYPE = #{USER_TYPE,jdbcType=INTEGER},
+      MAIL = #{MAIL,jdbcType=VARCHAR},
+      ADDRESS = #{ADDRESS,jdbcType=VARCHAR},
+      PHONE = #{PHONE,jdbcType=VARCHAR},
+      USER_PIC = #{USER_PIC,jdbcType=VARCHAR}
+    where USER_ID = #{USER_ID,jdbcType=INTEGER}
+  </update>
+</mapper>
