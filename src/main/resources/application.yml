@@ -1,11 +1,16 @@
 spring:
-  #springboot 2.0 默认连接池就是Hikari，而非druid,但是以下方式配置Hikari仍然可以识别
+  #springboot 2.0榛樿浣跨敤鐨勮繛鎺ユ睜鏄疕ikari鏉ヤ唬鏇縟ruid,浠ヤ笅閰嶇疆Hikari涔熷彲浠ヤ娇鐢紝鍚屾椂鍙厤缃澶杊ikari鐗规湁閰嶇疆
   datasource:
     url: jdbc:mysql://localhost:3306/sys_db_demo?serverTimezone=UTC
-    # mysql6.0以后使用com.mysql.cj.jdbc.Driver驱动，而非com.mysql.jdbc.Driver
+    # mysql6.0浠ュ悗瑕佷娇鐢╟om.mysql.cj.jdbc.Driver椹卞姩锛岃�岄潪com.mysql.jdbc.Driver
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
+#  mvc:
+#    static-path-pattern: /static/**
+#  resources:
+#    static-locations: ["/static","/templates"]
 mybatis:
   mapper-locations: classpath:com/surfilter/ssm/dbconfig/*.xml
   type-aliases-package: com.surfilter.bootmybatis.ssm.model
+

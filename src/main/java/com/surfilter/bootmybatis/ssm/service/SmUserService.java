@@ -13,4 +13,7 @@ public class SmUserService {
         SmUser user = smUserMapper.selectByPrimaryKey(id);
         return user.getUSER_NAME();
     }
+    public SmUser getUserById(int id) {
+        return smUserMapper.selectByPrimaryKey(id);
+    }
 }

@@ -1,0 +1,72 @@
+<html>
+<meta charset="UTF-8" />
+<body>
+<iframe src="welcome.html"></iframe>
+<div>
+    <button class="buttonbg" onclick="queryById()">query</button>
+</div>
+<script src="js/ajaxtest.js"></script>
+<link rel="stylesheet" href="css/mystyle.css">
+<script type="text/javascript" >
+    function showDiv(){
+        document.getElementById("bId").style.display="block";
+        document.getElementById("sId").style.display="block";
+    }
+    function hideDiv(){
+        document.getElementById("bId").style.display="none";
+        document.getElementById("sId").style.display="none";
+    }
+    function queryById(){
+        var id = 4;
+        $.ajaxtest({
+            method: "get",
+            url: "SmUser/getUserById.action?id=4",
+            contentType: "application/json",
+            data: null,
+            success: function (res) {
+                console.log(JSON.parse(res));
+            }
+        });
+    }
+
+</script>
+
+<style>
+    .bg{
+        display:none;
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        background-color:black;
+        z-index:1001;
+        opacity:0.5;
+
+    }
+    .show{
+        display:none;
+        position:absolute;
+        top:30%;
+        left:30%;
+        width:40%;
+        height:40%;
+        background-color:white;
+        z-index:1002;
+
+    }
+    .loginStyle{
+        margin: 20px 25%;
+
+    }
+    .fontAlign{
+        margin-left:5px;
+        font-size:20px;
+        width:200px;
+        height:50px;
+        text-align:center;
+    }
+
+</style>
+</body>
+</html>
